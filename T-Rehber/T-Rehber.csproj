@@ -110,6 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\T_Rehber.mdf" />
+    <Content Include="App_Data\T_Rehber_log.ldf" />
     <Content Include="css\bootstrap.css" />
     <Content Include="Global.asax" />
     <Content Include="img\116-512.png" />
@@ -149,9 +151,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
