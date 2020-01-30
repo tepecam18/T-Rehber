@@ -1,0 +1,79 @@
+﻿@model List<T_Rehber.Models.Calisan>
+@{
+    ViewBag.Title = "T_Admin";
+    ViewBag.home = "active";
+    Layout = "~/Views/_LayoutPage2.cshtml";
+}
+
+<div class="container bg-light">
+    <div class="row py-3">
+        <div class="col-md-8 mx-auto">
+            <div class="fade @ViewBag.yetkisiz">Çalısanları Silme izniniz yok.</div>
+            <table class="table table-dark alert">
+                <thead>
+                    <tr>
+                        <th class="border-top-0">Adı</th>
+                        <th>Soyadı</th>
+                        <th>Telefon No</th>
+                        <th>Departman</th>
+                        <th>Yönetici<br />Adı Soyadı</th>
+                        <th class="border-top-0"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr class="col-md-9">
+                                <td>@item.Adi</td>
+                                <td>@item.Soyadi</td>
+                                <td>@item.Tel</td>
+                                <td>
+                                    @*departman lup olmadıgının kontrolü*@
+                                    @if (item.DepartmanID != null)
+                                    {
+                                        @item.Departman.DepartmanAdi
+                                    }
+                                    else
+                                    {
+                                        Write("-");
+                                    }
+                                </td>
+                                <td>
+                                    @*yoneticisi olup olmadığının kontrolü*@
+                                    @if (item.YoneticiID != null)
+                                    {
+                                        @Model.Where(i => i.ID == item.YoneticiID).FirstOrDefault().Adi
+                                        Write(" ");
+                                        @Model.Where(i => i.ID == item.YoneticiID).FirstOrDefault().Soyadi
+                                    }
+                                    else
+                                    {
+                                        Write("-");
+                                    }
+
+                                </td>
+                                <td class="px-0 w-auto">
+                                    @using (Html.BeginForm("UyeSil", "Admin", FormMethod.Post))
+                                    {
+                                        @Html.ActionLink("Düzenle", "UyeEkle", "Admin", new { item.ID }, new { @class = "alert alert-dark btn-outline-danger w-auto" })
+
+                                        if (Session["OturumID"] != null)
+                                        {
+                                            if (Model.Where(i => i.ID == (int)Session["OturumID"]).FirstOrDefault().YoneticiID == null)
+                                            {
+                                                <button class="alert alert-danger btn-outline-danger w-auto" type="submit" name="ID" value="@item.ID">Sil</button>
+                                            }
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

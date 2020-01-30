@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "T-Login";
+    ViewBag.login = "active";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+<div class="row py-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-light py-5 mx-3 alert">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+        {
+
+            <div class="form-group form-row">
+                <label class="col-md-3 text-md-right">Telefon no :</label>
+                <div class="col-md-9">
+                    @Html.TextBox("tel", null, new { @class = "form-control", @autofocus="autofocus"})
+                </div>
+            </div>
+
+            <div class="form-group form-row">
+                <label class="col-md-3 text-md-right">Sifre :</label>
+                <div class="col-md-9">
+                    @Html.TextBox("sifre", null, new { @class = "form-control", @type = "password" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="offset-sm-3 col-md-9">
+                    <button type="submit" class="btn btn-danger">Giriş Yap</button>
+                </div>
+            </div>
+        }
+
+        @Html.Label("uyarı", "Hatalı Sifre yada telefon numarası", new { @class = "fade" + ViewBag.str })
+    </div>
+</div>

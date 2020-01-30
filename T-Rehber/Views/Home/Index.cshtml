@@ -1,0 +1,34 @@
+﻿@using T_Rehber.Models;
+@model List<Calisan>
+@{
+    ViewBag.Title = "T-Rehber";
+    ViewBag.home = "active";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-dark table-hover alert">
+                <thead>
+                    <tr>
+                        <td class="border-top-0">Ad Soyad</td>
+                        <td>Telefon no</td>
+                        <td class="border-top-0"></td>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                            <td>@item.Adi @item.Soyadi</td>
+                            <td>@item.Tel</td>
+                            <td>@Html.ActionLink("Detay...", "Details", new { id=item.ID }, new { @class = "btn btn-danger w-100 btn-outline-dark text-light" } )</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+    </div>
+</div>
+

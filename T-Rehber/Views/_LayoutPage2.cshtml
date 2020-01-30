@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    <link rel="icon" href="~/img/116-512.png" type="image/x-icon" />
+</head>
+<body>
+    <div class="bg-danger pt-4 pb-0">
+        <div class="container text-right">
+            <a href="~/Admin" class="btn btn-outline-dark @ViewBag.home">Ana Sayfa</a>
+            <a href="~/Admin/UyeEkle" class="btn btn-outline-dark @ViewBag.calisan">Çalışan Ekle</a>
+            <a href="~/Admin/Departman" class="btn btn-outline-dark @ViewBag.departman">Departmanlar</a>
+            <a href="~/Admin/OturumKapat" class="btn btn-outline-dark">Çıkış Yap</a>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="~/js/bootstrap.js"></script>
+</body>
+</html>
+

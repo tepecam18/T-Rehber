@@ -1,0 +1,67 @@
+﻿@using T_Rehber.Models
+@model Calisan
+@{
+    ViewBag.Title = "T-Rehber";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-hover table-dark table-striped alert">
+                <tr>
+                    <th>Adı Soyadı<small class="float-right">:</small></th>
+                    <td>@Model.Adi @Model.Soyadi</td>
+                </tr>
+                <tr>
+                    <th>Telefon No <small class="float-right">:</small></th>
+                    <td>@Model.Tel</td>
+                </tr>
+                <tr>
+                    <th>Departman Adı<small class="float-right">:</small></th>
+                    <td>
+                        @try
+                        {
+                            @Model.Departman.DepartmanAdi
+
+                        }
+                        catch (Exception)
+                        {
+                            Write("-");
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Yönetici Adı Soyadı<small class="float-right">:</small></th>
+                    <td>
+                        @*yönetici olmadıgı durumlarda hata vermemesi için *@
+                        @try
+                        {
+                            @Model.Yonetici.Adi
+                            Write(" ");
+                            @Model.Yonetici.Soyadi
+                        }
+                        catch (Exception)
+                        {
+                            Write("-");
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Yönetici Telefon No<small class="float-right">:</small></th>
+                    <td>
+                        @try
+                        {
+                            @Model.Yonetici.Tel
+                        }
+                        catch (Exception)
+                        {
+                            Write("-");
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@model T_Rehber.Models.CalisanModel
+@{
+    ViewBag.Title = "T_Düzenle";
+    Layout = "~/Views/_LayoutPage2.cshtml";
+}
+
+<div class="container">
+    <div class="row py-3">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 w-auto table table-dark ">
+            @using (Html.BeginForm("UyeEkle", "Admin", FormMethod.Post))
+            {
+
+                <div class="form-group py-3 row">
+                    <label class="col-md-3 text-md-right h-auto">Adı* :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("ad", null, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 text-md-right h-auto">Soyadı* :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("soyad", null, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 text-md-right h-auto">Tel* :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("tel", null, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 text-md-right h-auto">Sifre :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("sifre", null, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 text-md-right h-auto">Departman :</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("departman", new SelectList(Model, "ID", "DepartmanAdi"),
+                       "Departman Seç", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-3 text-md-right h-auto">Yönetici :</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("yonetici", new SelectList(Model[0].Calisanlar, "ID", "Adi"),
+                       "Yönetici Seç", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-9 offset-sm-3">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                        <button type="reset" class="btn btn-danger">İptal Et</button>
+                    </div>
+                </div>
+            }
+
+            @*zorunlu alanların kontrolü*@
+            @{
+                if (IsPost)
+                {
+                    string ad = Request.Form["ad"];
+                    string soyad = Request.Form["soyad"];
+                    string tel = Request.Form["tel"];
+
+                    <div class="alert alert-danger w-100">"*" olan yerlerin doldurulması zorunludur</div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+

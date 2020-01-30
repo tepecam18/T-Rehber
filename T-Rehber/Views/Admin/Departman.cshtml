@@ -1,0 +1,69 @@
+﻿@model List<T_Rehber.Models.Departman>
+@{
+    ViewBag.Title = "T_Departman";
+    ViewBag.departman = "active";
+    int? id = ViewBag.ID;
+    Layout = "~/Views/_LayoutPage2.cshtml";
+}
+
+<div class="container bg-light py-3">
+    <div class="row">
+        <div class="col-md-3 offset-md-2 col-form-label">
+            @using (Html.BeginForm("Departman", "Admin", FormMethod.Post))
+            {
+                @Html.DropDownList("ID", new SelectList(Model, "ID", "DepartmanAdi", id),
+              "Departman Seç", new { @class = "form-control", onchange = "this.form.submit();" });
+            }
+
+        </div>
+        <div class="col-md-3">
+            @if (id != null)
+            {
+                using (Html.BeginForm("DepartmanDuzenle", "Admin", FormMethod.Post))
+                {
+                    <button class="alert alert-danger btn-outline-primary w-50" type="submit" name="ID" value="@id">Sil</button>
+                }
+
+            }
+        </div>
+    </div>
+    <div class="row py-5">
+        <div class="col-md-6 offset-md-3">
+            @using (Html.BeginForm("DepatmanEkle", "Admin", FormMethod.Post))
+            {
+                <h4 class="h4">Departman Ekle</h4>
+                <hr />
+                <div class="form-group form-row">
+                    <label class=" col-md-3 col-form-label">Departman Adı :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("dAdi", null, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <button class="alert alert-primary btn-outline-danger w-25 offset-md-3" type="submit">Ekle</button>
+            }
+        </div>
+
+        @if (id != null)
+        {
+            <hr />
+            <div class="col-md-6 offset-md-3 pt-5">
+
+                @using (Html.BeginForm("DepartmanDuzenle", "Admin", FormMethod.Post))
+                {
+                    <h4 class="h4">Departman Düzenle</h4>
+                    <hr />
+                    <div class="form-group form-row">
+                        <label class=" col-md-3 col-form-label">Departman Adı :</label>
+                        <div class="col-md-9">
+                            @Html.TextBox("dAdi", Model.Where(i=> i.ID == id).FirstOrDefault().DepartmanAdi, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <button class="alert alert-primary btn-outline-danger w-25 offset-md-3" type="submit" name="ID" value="@id">Düzenle</button>
+                }
+
+            </div>
+        }
+    </div>
+</div>

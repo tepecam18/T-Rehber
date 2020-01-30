@@ -1,0 +1,69 @@
+﻿@model T_Rehber.Models.CalisanModel
+@{
+    ViewBag.Title = "T_Düzenle/Ekle";
+    Layout = "~/Views/_LayoutPage2.cshtml";
+}
+
+<div class="container">
+    <div class="row pt-3">
+        <div class="col-md-2"></div>
+        <div class="alert col-md-8 w-auto table table-dark pt-5">
+            @using (Html.BeginForm("UyeEkle", "Admin", FormMethod.Post))
+            {
+                <div class="form-group pt-5 row">
+                    <label class="col-md-2 text-md-right h-auto">Adı* :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("ad", Model.Calisan.Adi, new { @class = "form-control", @required="required"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 text-md-right h-auto">Soyadı* :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("soyad", Model.Calisan.Soyadi, new { @class = "form-control", @required="required"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 text-md-right h-auto">Tel* :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("tel", Model.Calisan.Tel, new { @class = "form-control", @required="required"})
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 text-md-right h-auto">Sifre :</label>
+                    <div class="col-md-9">
+                        @Html.TextBox("sifre", "***", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 text-md-right h-auto">Departman :</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("departman", new SelectList(Model.Departmanlar, "ID", "DepartmanAdi", Model.Calisan.DepartmanID),
+                "Departman Seç", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-2 text-md-right h-auto">Yönetici :</label>
+                    <div class="col-md-9">
+                        @Html.DropDownList("yonetici", new SelectList(Model.Calisanlar, "ID", "Adi", Model.Calisan.YoneticiID),
+                "Yönetici Seç", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-9 offset-sm-2">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                        <button type="reset" class="btn btn-danger">İptal Et</button>
+                    </div>
+                </div>
+            }
+            <div class="alert alert-success w-100 @ViewBag.kaydedildi">başarıyla kaydedildi.</div>
+
+        </div>
+    </div>
+</div>
+
